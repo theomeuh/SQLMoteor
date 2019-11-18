@@ -28,7 +28,7 @@ int PersistentObject::save(){
     db.setDatabaseName("HARDCODED.db"); // name db
 
     if (! db.open()){
-    cout << "Unable to open the database." << endl;
+        cout << "Unable to open the database." << endl;
     }
 
 

@@ -19,16 +19,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    newbook.cpp \
     persistentattribute.cpp \
     persistentobject.cpp
 
 HEADERS += \
     mainwindow.h \
+    newbook.h \
     persistentattribute.h \
     persistentobject.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    newbook.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
