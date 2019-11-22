@@ -1,5 +1,6 @@
 #include "newbook.h"
 #include "ui_newbook.h"
+#include "book.h"
 
 NewBook::NewBook(QWidget *parent) :
     QDialog(parent),
@@ -13,8 +14,16 @@ NewBook::~NewBook()
     delete ui;
 }
 
-QStringList NewBook::on_authorsEdit_textChanged(const QString &authorsString)
+Book NewBook::on_buttonBox_accepted()
 {
-    // parse authorsString on comma and return QStringList
-    return QStringList();
+    QStringList authors = ui->authorsEdit->text().split(",");
+    QString title = ui->titleEdit->text();
+    int ISBN = ui->ISBNEdit->text().toInt();
+    int year = ui->yearEdit->text().toInt();
+
+    Book new_book(authors, title, ISBN, year);
+
+    new_book.print();
+
+    return new_book;
 }

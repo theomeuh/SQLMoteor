@@ -63,6 +63,9 @@
    <property name="text">
     <string>New Book</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionOpen">
    <property name="text">

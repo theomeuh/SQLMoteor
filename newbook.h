@@ -2,6 +2,7 @@
 #define NEWBOOK_H
 
 #include <QDialog>
+#include "book.h"
 
 namespace Ui {
 class NewBook;
@@ -16,7 +17,7 @@ public:
     ~NewBook();
 
 private slots:
-    QStringList on_authorsEdit_textChanged(const QString &authorsString);
+    Book on_buttonBox_accepted();
 
 private:
     Ui::NewBook *ui;
