@@ -17,7 +17,7 @@ class PersistentAttribute
         */
         void *data; // pointer to read and write data when storing and getting class
 
-        PersistentAttribute(QString *, QVariant::Type, void *);
+        PersistentAttribute(QString * name, QVariant::Type type, void * data);
 };
 
 #endif // PERSISTENTATTRIBUTE_H

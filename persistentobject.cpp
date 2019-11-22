@@ -12,7 +12,8 @@ using namespace std;
 
 PersistentObject::PersistentObject(QString className) :
     id(persistantObjectCounter++),
-    table(&className)
+    table(&className),
+    attributes(new QList<PersistentAttribute *>)
 {
 
 }
