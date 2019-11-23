@@ -2,6 +2,7 @@
 #define PERSISTENTOBJECT_H
 
 #include <QList>
+#include <QSqlDatabase>
 #include "persistentattribute.h"
 
 class PersistentObject
@@ -17,6 +18,18 @@ class PersistentObject
             @return name_1 TYPE_1 name_2 TYPE_2 ... name_n TYPE_n
         */
         QString generateFieldsTable();
+
+        /**
+         * @brief Connect to the db of the app and init the table if it does not exist
+         * @return QSqlDatabase db
+         */
+        void SQLDbInit(QSqlDatabase *db);
+
+        /**
+         * @brief Make the insertion of the PersistentObject in the database `db` in the table `table`
+         * @param QSqlDatabase db
+         */
+        void insert(QSqlDatabase *db);
 
     public:
         PersistentObject(QString className);

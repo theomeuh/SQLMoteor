@@ -33,20 +33,8 @@ void PersistentObject::print()
 int PersistentObject::save()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    db.setDatabaseName("HARDCODED.db"); // name db
-    if (! db.open()){
-        cout << "Unable to open the database." << endl;
-    }
-
-    QString queryStr = QString("CREATE TABLE IF NOT EXISTS %1 (%2)").arg(this->table, this->generateFieldsTable());
-    qDebug() << queryStr;
-    QSqlQuery query(db);
-    query.prepare(queryStr);
-    if (! query.exec())
-    {
-        cout << "Error executing query" << endl;
-        qDebug() << query.lastError();
-    }
+    this->SQLDbInit(&db);
+    this->insert(&db);
     db.close ();
     return this->id;
 }
@@ -63,4 +51,27 @@ QString PersistentObject::generateFieldsTable()
                 this->attributes->size()-1
               )->createSQLField();
     return fields;
+}
+
+void PersistentObject::SQLDbInit(QSqlDatabase *db)
+{
+    db->setDatabaseName("HARDCODED.db"); // name db
+    if (! db->open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("CREATE TABLE IF NOT EXISTS %1 (%2)").arg(this->table, this->generateFieldsTable());
+    qDebug() << queryStr;
+    QSqlQuery query(*db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing query" << endl;
+        qDebug() << query.lastError();
+    }
+}
+
+void PersistentObject::insert(QSqlDatabase *db)
+{
+    cout << "insert TOOD" << endl;
 }
