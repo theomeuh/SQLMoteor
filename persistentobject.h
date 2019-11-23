@@ -8,13 +8,24 @@ class PersistentObject
 {
     private:
         int id; // id of the object in database. It's UNIQUE
-        QString *table; // name of the SQL table where it's stored
+        QString table; // name of the SQL table where it's stored
         QList<PersistentAttribute *> *attributes; // attributes to store
+
+        /**
+            @brief Generate a QString to be inserted in a CREATE SQL statement
+            @line
+            @return name_1 TYPE_1 name_2 TYPE_2 ... name_n TYPE_n
+        */
+        QString generateFieldsTable();
 
     public:
         PersistentObject(QString className);
         void addAttribute(PersistentAttribute *);
-        int save(); // save() goes through attributes and each attribute must be able to store itself in the table of the class
+        /**
+         * @brief Save the object in a database
+         * @return
+         */
+        int save();
         void print();
 
 };

@@ -11,7 +11,7 @@
 using namespace std;
 
 PersistentObject::PersistentObject(QString className) :
-    table(&className),
+    table(className),
     attributes(new QList<PersistentAttribute *>)
 {
     static int persistantObjectCounter = 0;
@@ -26,53 +26,41 @@ void PersistentObject::addAttribute(PersistentAttribute *persistantAttribute){
 void PersistentObject::print()
 {
     cout << "Persistent ID: " << this->id << endl;
+    cout << "table: " << this->table.toStdString() << endl;
 }
 
 
-int PersistentObject::save(){
-
+int PersistentObject::save()
+{
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
     db.setDatabaseName("HARDCODED.db"); // name db
-
     if (! db.open()){
         cout << "Unable to open the database." << endl;
     }
 
-
-    // Ensure inputs are sanitized to prevent sql injection
-    for(int i=0; i < this->attributes->count(); i++){
-        PersistentAttribute *attribute = this->attributes->at(i);
-        QSqlQuery query(db);
-        QString queryStr = "";
-
-//        QVariant variant = attribute->type;
-//        // enumeration on QMetaType instead on QVariant because float type is not in QVariant
-//        switch (static_cast<QMetaType::Type>(variant.type())) {
-//            case QMetaType::Int:
-//                cout << "This is a int" << endl;
-//                break;
-//            case QMetaType::Float:
-//                cout << "This is a float" << endl;
-//                break;
-//            case QMetaType::QString:
-//                cout << "This is a QString" << endl;
-//                break;
-//            case QMetaType::QStringList:
-//                cout << "This is a QStringList" << endl;
-//                break;
-//            default:;
-//        }
-
-
-        query.prepare(queryStr);
-        query.bindValue(":id", attribute->name);
-        if (! query.exec())
-        {
-            cout << "Error executing query" << endl;
-            qDebug() << query.lastError();
-        }
+    QString queryStr = QString("CREATE TABLE IF NOT EXISTS %1 (%2)").arg(this->table, this->generateFieldsTable());
+    qDebug() << queryStr;
+    QSqlQuery query(db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing query" << endl;
+        qDebug() << query.lastError();
     }
-
     db.close ();
     return this->id;
+}
+
+QString PersistentObject::generateFieldsTable()
+{
+    QString fields = QString("id INTEGER UNIQUE PRIMARY KEY, ");
+    for (int index=0; index < this->attributes->size() -1; index++)
+    {
+        fields += this->attributes->at(index)->createSQLField() + QString(", ");
+    }
+    // no comma after the last element
+    fields += this->attributes->at(
+                this->attributes->size()-1
+              )->createSQLField();
+    return fields;
 }

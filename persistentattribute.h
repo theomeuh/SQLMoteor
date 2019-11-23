@@ -5,6 +5,15 @@
 
 class PersistentAttribute
 {
+    private:
+
+        /**
+         * @brief Return the SQL type corresponding to the QVariant type
+         * @return TYPE
+         */
+        QString Qtype2SQLType();
+
+
     public:
         QString name; // name and ID of the attribute in the class to store and in the database
         QVariant::Type type; /* type of data to store
@@ -16,8 +25,14 @@ class PersistentAttribute
           - float
         */
         void *data; // pointer to read and write data when storing and getting class
-
         PersistentAttribute(QString * name, QVariant::Type type, void * data);
+
+        /**
+         * @brief Create a part of a SQL CREATE statement to declare a field
+         * @line
+         * @return "name TYPE"
+         */
+        QString createSQLField();
 };
 
 #endif // PERSISTENTATTRIBUTE_H
