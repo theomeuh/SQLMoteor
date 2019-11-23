@@ -1,4 +1,10 @@
+### Custom ignore ###
+# Project exe
 SQLMoteor
+
+# Database created by the project
+*.db
+
 
 
 # Created by https://www.gitignore.io/api/qt,c++,qtcreator

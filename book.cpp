@@ -25,4 +25,10 @@ void Book::print(){
     }
     cout << "year: " << this->year << endl;
     cout << "ISBN: " << this->ISBN << endl;
+    PersistentObject::print();
+}
+
+int Book::save()
+{
+    return PersistentObject::save();
 }

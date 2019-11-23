@@ -6,20 +6,26 @@
 #include "persistentobject.h"
 #include "persistentattribute.h"
 
-int persistantObjectCounter = 0;
+
 
 using namespace std;
 
 PersistentObject::PersistentObject(QString className) :
-    id(persistantObjectCounter++),
     table(&className),
     attributes(new QList<PersistentAttribute *>)
 {
-
+    static int persistantObjectCounter = 0;
+    persistantObjectCounter ++;
+    this->id = persistantObjectCounter;
 }
 
 void PersistentObject::addAttribute(PersistentAttribute *persistantAttribute){
     attributes->append(persistantAttribute);
+}
+
+void PersistentObject::print()
+{
+    cout << "Persistent ID: " << this->id << endl;
 }
 
 
@@ -39,23 +45,23 @@ int PersistentObject::save(){
         QSqlQuery query(db);
         QString queryStr = "";
 
-        QVariant variant = attribute->type;
-        // enumeration on QMetaType instead on QVariant because float type is not in QVariant
-        switch (static_cast<QMetaType::Type>(variant.type())) {
-            case QMetaType::Int:
-                cout << "This is a int" << endl;
-                break;
-            case QMetaType::Float:
-                cout << "This is a float" << endl;
-                break;
-            case QMetaType::QString:
-                cout << "This is a QString" << endl;
-                break;
-            case QMetaType::QStringList:
-                cout << "This is a QStringList" << endl;
-                break;
-            default:;
-        }
+//        QVariant variant = attribute->type;
+//        // enumeration on QMetaType instead on QVariant because float type is not in QVariant
+//        switch (static_cast<QMetaType::Type>(variant.type())) {
+//            case QMetaType::Int:
+//                cout << "This is a int" << endl;
+//                break;
+//            case QMetaType::Float:
+//                cout << "This is a float" << endl;
+//                break;
+//            case QMetaType::QString:
+//                cout << "This is a QString" << endl;
+//                break;
+//            case QMetaType::QStringList:
+//                cout << "This is a QStringList" << endl;
+//                break;
+//            default:;
+//        }
 
 
         query.prepare(queryStr);

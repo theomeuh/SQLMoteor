@@ -15,6 +15,7 @@ class PersistentObject
         PersistentObject(QString className);
         void addAttribute(PersistentAttribute *);
         int save(); // save() goes through attributes and each attribute must be able to store itself in the table of the class
+        void print();
 
 };
 
