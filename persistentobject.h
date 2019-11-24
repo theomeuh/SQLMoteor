@@ -15,9 +15,15 @@ class PersistentObject
         /**
             @brief Generate a QString to be inserted in a CREATE SQL statement
             @line
-            @return name_1 TYPE_1 name_2 TYPE_2 ... name_n TYPE_n
+            @return name_1 TYPE_1, name_2 TYPE_2, ... name_n TYPE_n
         */
         QString generateFieldsTable();
+
+        /**
+         * @brief Generate a QString to be inserted in a INSERT INTO SQL statement
+         * @return 'value_1', 'value_2', ... 'value_n'
+         */
+        QString insertFieldsTable();
 
         /**
          * @brief Connect to the db of the app and init the table if it does not exist

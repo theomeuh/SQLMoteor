@@ -33,6 +33,12 @@ class PersistentAttribute
          * @return "name TYPE"
          */
         QString createSQLField();
+
+        /**
+         * @brief Cast void pointer `data` depending on QVariant::type `type`
+         * @return QVariant data
+         */
+        QString voidPointer2QString();
 };
 
 #endif // PERSISTENTATTRIBUTE_H

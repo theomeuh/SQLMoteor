@@ -1,4 +1,5 @@
 #include "persistentattribute.h"
+#include "QDebug"
 
 using namespace std;
 
@@ -8,7 +9,10 @@ PersistentAttribute::PersistentAttribute(
     type(attributeType),
     data(attribute)
 {
-
+    qDebug() << "name: " << this->name << endl;
+    qDebug() << "type: " << this->type << endl;
+    qDebug() << "address of data: " << this->data << endl;
+    qDebug() << "address of data: " << this->voidPointer2QString() << endl;
 }
 
 QString PersistentAttribute::createSQLField()
@@ -29,6 +33,24 @@ QString PersistentAttribute::Qtype2SQLType()
                     return QString("VARCHAR(255)");
                 case QMetaType::QStringList:
                     return QString("VARCHAR(1023)");
+                default:;
+                    throw std::invalid_argument("type of attribute not in Int, Float, QString, QStringList");
+            }
+}
+
+QString PersistentAttribute::voidPointer2QString()
+{
+    QVariant variant = this->type;
+             //enumeration on QMetaType instead on QVariant because float type is not in QVariant
+            switch (static_cast<QMetaType::Type>(variant.type())) {
+                case QMetaType::Int:
+                    return QString::number(*static_cast<int*>(this->data));
+                case QMetaType::Float:
+                    return QString::number(*static_cast<float*>(this->data));
+                case QMetaType::QString:
+                    return *static_cast<QString*>(this->data);
+                case QMetaType::QStringList:
+                    return static_cast<QStringList*>(this->data)->join(",");
                 default:;
                     throw std::invalid_argument("type of attribute not in Int, Float, QString, QStringList");
             }
