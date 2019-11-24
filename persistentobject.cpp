@@ -69,6 +69,7 @@ QString PersistentObject::generateFieldsTable()
 QString PersistentObject::insertFieldsTable()
 {
     QString values = QString::number(this->id) + QString(", ");
+    this->print();
     for (int index=0; index < this->attributes->size() -1; index++)
     {
         // pre and append single quote to handle comma seperated list

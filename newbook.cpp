@@ -21,7 +21,7 @@ Book NewBook::on_buttonBox_accepted()
     int ISBN = ui->ISBNEdit->text().toInt();
     int year = ui->yearEdit->text().toInt();
 
-    Book new_book(authors, title, ISBN, year);
+    Book new_book(authors, title, &ISBN, &year);
 
     new_book.print();
     new_book.save();

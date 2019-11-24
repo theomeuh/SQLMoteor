@@ -4,7 +4,7 @@ using namespace std;
 
 
 
-Book::Book(QStringList authors, QString title, int ISBN, int year) : PersistentObject("Book"),
+Book::Book(QStringList authors, QString title, int* ISBN, int* year) : PersistentObject("Book"),
     authors(authors),
     title(title),
     ISBN(ISBN),
@@ -12,8 +12,8 @@ Book::Book(QStringList authors, QString title, int ISBN, int year) : PersistentO
 {
     this->addAttribute(new PersistentAttribute(new QString("authors"), QVariant::StringList, &authors));
     this->addAttribute(new PersistentAttribute(new QString("title"), QVariant::String, &title));
-    this->addAttribute(new PersistentAttribute(new QString("ISBN"), QVariant::Int, &ISBN));
-    this->addAttribute(new PersistentAttribute(new QString("year"), QVariant::Int, &year));
+    this->addAttribute(new PersistentAttribute(new QString("ISBN"), QVariant::Int, ISBN));
+    this->addAttribute(new PersistentAttribute(new QString("year"), QVariant::Int, year));
 }
 
 

@@ -12,7 +12,7 @@ PersistentAttribute::PersistentAttribute(
     qDebug() << "name: " << this->name << endl;
     qDebug() << "type: " << this->type << endl;
     qDebug() << "address of data: " << this->data << endl;
-    qDebug() << "address of data: " << this->voidPointer2QString() << endl;
+    qDebug() << "data: " << this->voidPointer2QString() << endl;
 }
 
 QString PersistentAttribute::createSQLField()

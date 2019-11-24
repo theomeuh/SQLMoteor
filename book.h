@@ -12,10 +12,10 @@ class Book : private PersistentObject
 public:
     QStringList authors;
     QString title;
-    int ISBN;
-    int year;
+    int* ISBN;
+    int* year;
 
-    Book(QStringList authors, QString title, int ISBN, int year);
+    Book(QStringList authors, QString title, int* ISBN, int* year);
     int save();
     void print();
 };

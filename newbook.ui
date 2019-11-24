@@ -83,7 +83,7 @@
     <item row="2" column="1">
      <widget class="QLineEdit" name="ISBNEdit">
       <property name="text">
-       <string>8765</string>
+       <string>9876</string>
       </property>
      </widget>
     </item>
