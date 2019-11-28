@@ -29,6 +29,39 @@ void PersistentObject::print()
     cout << "table: " << this->table.toStdString() << endl;
 }
 
+void PersistentObject::getBooks(){
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
+    this->get(&db);
+    db.close ();
+}
+
+void PersistentObject::get(QSqlDatabase *db)
+{
+    db->setDatabaseName("HARDCODED.db"); // name db
+    if (! db->open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("select year,ISBN,title,authors from Book ");
+    qDebug() << queryStr;
+    QSqlQuery query(*db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing Get query" << endl;
+        qDebug() << query.lastError();
+    }
+    while(query.next()){
+        QString year = query.value(0).toString();
+        QString ISBN = query.value(1).toString();
+        QString title = query.value(2).toString();
+        QString author = query.value(3).toString();
+        cout << "Title : " << title.toStdString();
+        cout << ", Year : " << year.toStdString();
+        cout << ", ISBN : " << ISBN.toStdString();
+        cout << ", Authors :" << author.toStdString() << endl;
+    }
+}
 
 int PersistentObject::save()
 {
@@ -38,6 +71,14 @@ int PersistentObject::save()
     db.close ();
     return this->id;
 }
+
+void PersistentObject::drop()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
+    this->dropTable(&db);
+    db.close ();
+}
+
 
 void PersistentObject::insert(QSqlDatabase *db)
 {
@@ -100,3 +141,22 @@ void PersistentObject::SQLDbInit(QSqlDatabase *db)
         qDebug() << query.lastError();
     }
 }
+
+void PersistentObject::dropTable(QSqlDatabase *db){
+    db->setDatabaseName("HARDCODED.db"); // name db
+    if (! db->open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("DROP table Book");
+    qDebug() << queryStr;
+    QSqlQuery query(*db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing query" << endl;
+        qDebug() << query.lastError();
+    }
+}
+
+

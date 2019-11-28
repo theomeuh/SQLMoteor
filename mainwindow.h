@@ -18,6 +18,10 @@ public:
 private slots:
     void on_actionNew_Book_triggered();
 
+    void on_actionOpen_triggered();
+
+    void on_actionErase_Bookcase_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

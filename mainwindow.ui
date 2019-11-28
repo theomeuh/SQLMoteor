@@ -30,6 +30,7 @@
     <addaction name="actionNew_Book"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionErase_Bookcase"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -75,6 +76,11 @@
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
+   </property>
+  </action>
+  <action name="actionErase_Bookcase">
+   <property name="text">
+    <string>Erase Bookcase</string>
    </property>
   </action>
  </widget>
