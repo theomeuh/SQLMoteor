@@ -7,8 +7,14 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , bookTable()
 {
     ui->setupUi(this);
+    bookTable = new QTableWidget();
+    bookTable->setRowCount(10);
+    bookTable->setColumnCount(10);
+
+    bookTable->setItem(1,1,new QTableWidgetItem("test"));
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +33,7 @@ void MainWindow::on_actionOpen_triggered()
 {
     QString book;
     PersistentObject* persistentObject = new PersistentObject(book);
-    persistentObject->getBooks();
+    persistentObject->get();
 }
 
 void MainWindow::on_actionErase_Bookcase_triggered()

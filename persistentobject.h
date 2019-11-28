@@ -46,9 +46,7 @@ class PersistentObject
          */
         int save();
         void print();
-        void get(QSqlDatabase *db);
-        void getBooks();
-        void dropTable(QSqlDatabase *db);
+        void get();
         void drop();
 
 };

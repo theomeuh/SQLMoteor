@@ -29,22 +29,17 @@ void PersistentObject::print()
     cout << "table: " << this->table.toStdString() << endl;
 }
 
-void PersistentObject::getBooks(){
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    this->get(&db);
-    db.close ();
-}
-
-void PersistentObject::get(QSqlDatabase *db)
+void PersistentObject::get()
 {
-    db->setDatabaseName("HARDCODED.db"); // name db
-    if (! db->open()){
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
+    db.setDatabaseName("HARDCODED.db"); // name db
+    if (! db.open()){
         cout << "Unable to open the database." << endl;
     }
 
     QString queryStr = QString("select year,ISBN,title,authors from Book ");
     qDebug() << queryStr;
-    QSqlQuery query(*db);
+    QSqlQuery query(db);
     query.prepare(queryStr);
     if (! query.exec())
     {
@@ -75,8 +70,20 @@ int PersistentObject::save()
 void PersistentObject::drop()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    this->dropTable(&db);
-    db.close ();
+    db.setDatabaseName("HARDCODED.db"); // name db
+    if (! db.open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("DROP table Book");
+    qDebug() << queryStr;
+    QSqlQuery query(db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing query" << endl;
+        qDebug() << query.lastError();
+    }    db.close ();
 }
 
 
@@ -141,22 +148,3 @@ void PersistentObject::SQLDbInit(QSqlDatabase *db)
         qDebug() << query.lastError();
     }
 }
-
-void PersistentObject::dropTable(QSqlDatabase *db){
-    db->setDatabaseName("HARDCODED.db"); // name db
-    if (! db->open()){
-        cout << "Unable to open the database." << endl;
-    }
-
-    QString queryStr = QString("DROP table Book");
-    qDebug() << queryStr;
-    QSqlQuery query(*db);
-    query.prepare(queryStr);
-    if (! query.exec())
-    {
-        cout << "Error executing query" << endl;
-        qDebug() << query.lastError();
-    }
-}
-
-

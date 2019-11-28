@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,7 +23,11 @@ private slots:
 
     void on_actionErase_Bookcase_triggered();
 
+    void cellSelected(int nRow, int nCol);
+
 private:
     Ui::MainWindow *ui;
+    QTableWidget* bookTable;
+
 };
 #endif // MAINWINDOW_H

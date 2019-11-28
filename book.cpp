@@ -34,7 +34,7 @@ int Book::save()
 }
 
 void Book::get(){
-    return PersistentObject::getBooks();
+    return PersistentObject::get();
 }
 
 void Book::drop(){
