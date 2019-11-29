@@ -29,6 +29,37 @@ void PersistentObject::print()
     cout << "table: " << this->table.toStdString() << endl;
 }
 
+QList<QStringList> PersistentObject::get(QString tableName)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
+    db.setDatabaseName("HARDCODED.db"); // name db
+    if (! db.open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("select * from %1").arg(tableName);
+    qDebug() << queryStr;
+    QSqlQuery query(db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing Get query" << endl;
+        qDebug() << query.lastError();
+    }
+    QList<QStringList> data;
+    while(query.next()){
+        QStringList row;
+        int index = 0;
+        while(query.value(index).toString()!="")
+        {
+            QString value = query.value(index).toString();
+            row.append(value);
+            index++;
+        }
+        data.append(row);
+    }
+    return data;
+}
 
 int PersistentObject::save()
 {
@@ -38,6 +69,26 @@ int PersistentObject::save()
     db.close ();
     return this->id;
 }
+
+void PersistentObject::drop()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
+    db.setDatabaseName("HARDCODED.db"); // name db
+    if (! db.open()){
+        cout << "Unable to open the database." << endl;
+    }
+
+    QString queryStr = QString("DROP table Book");
+    qDebug() << queryStr;
+    QSqlQuery query(db);
+    query.prepare(queryStr);
+    if (! query.exec())
+    {
+        cout << "Error executing query" << endl;
+        qDebug() << query.lastError();
+    }    db.close ();
+}
+
 
 void PersistentObject::insert(QSqlDatabase *db)
 {
