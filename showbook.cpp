@@ -2,14 +2,14 @@
 #include "ui_newbook.h"
 #include "book.h"
 
-NewBook::NewBook(QWidget *parent) :
+ShowBook::ShowBook(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewBook)
 {
     ui->setupUi(this);
 }
 
-NewBook::~NewBook()
+ShowBook::~ShowBook()
 {
     delete ui;
 }
@@ -21,7 +21,7 @@ Book NewBook::on_buttonBox_accepted()
     int ISBN = ui->ISBNEdit->text().toInt();
     int year = ui->yearEdit->text().toInt();
 
-    Book new_book(&authors, &title, &ISBN, &year);
+    Book new_book(authors, title, &ISBN, &year);
 
     new_book.print();
     new_book.save();
