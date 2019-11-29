@@ -29,7 +29,7 @@ void PersistentObject::print()
     cout << "table: " << this->table.toStdString() << endl;
 }
 
-QList<QStringList> PersistentObject::get()
+QList<QStringList> PersistentObject::get(QString tableName)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
     db.setDatabaseName("HARDCODED.db"); // name db
@@ -37,7 +37,7 @@ QList<QStringList> PersistentObject::get()
         cout << "Unable to open the database." << endl;
     }
 
-    QString queryStr = QString("select year,ISBN,title,authors from Book ");
+    QString queryStr = QString("select * from %1").arg(tableName);
     qDebug() << queryStr;
     QSqlQuery query(db);
     query.prepare(queryStr);
@@ -49,21 +49,15 @@ QList<QStringList> PersistentObject::get()
     QList<QStringList> data;
     while(query.next()){
         QStringList row;
-        QString year = query.value(0).toString();
-        QString ISBN = query.value(1).toString();
-        QString title = query.value(2).toString();
-        QString author = query.value(3).toString();
-        cout << "Title : " << title.toStdString();
-        cout << ", Year : " << year.toStdString();
-        cout << ", ISBN : " << ISBN.toStdString();
-        cout << ", Authors :" << author.toStdString() << endl;
-        row.append(year);
-        row.append(ISBN);
-        row.append(title);
-        row.append(author);
+        int index = 0;
+        while(query.value(index).toString()!="")
+        {
+            QString value = query.value(index).toString();
+            row.append(value);
+            index++;
+        }
         data.append(row);
     }
-
     return data;
 }
 

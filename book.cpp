@@ -36,3 +36,7 @@ int Book::save()
 void Book::drop(){
     return PersistentObject::drop();
 }
+
+QList<QStringList> Book::get(){
+    return PersistentObject::get("Book");
+}

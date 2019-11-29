@@ -27,22 +27,20 @@ void MainWindow::on_actionNew_Book_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString book;
-    PersistentObject* persistentObject = new PersistentObject(book);
-    QList<QStringList> data = persistentObject->get();
-    ui->bookTable->setRowCount(data.size());
-    ui->bookTable->setColumnCount(data.value(0).size());
+    QList<QStringList> data = Book::get();
+    ui->table->setRowCount(data.size());
+    ui->table->setColumnCount(data.value(0).size());
         /*add stuff inside the table view*/
-        for(int i=0; i<ui->bookTable->rowCount(); i++)
+        for(int i=0; i<ui->table->rowCount(); i++)
         {
-            for(int j=0; j<ui->bookTable->columnCount(); j++)
+            for(int j=0; j<ui->table->columnCount(); j++)
             {
                 QString valueCell = data.value(i).value(j);
-                QTableWidgetItem *pCell = ui->bookTable->item(i, j);
+                QTableWidgetItem *pCell = ui->table->item(i, j);
                 if(!pCell)
                 {
                     pCell = new QTableWidgetItem;
-                    ui->bookTable->setItem(i, j, pCell);
+                    ui->table->setItem(i, j, pCell);
                 }
                 pCell->setText(valueCell);
             }

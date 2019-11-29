@@ -19,6 +19,7 @@ public:
     int save();
     void print();
     void drop();
+    static QList<QStringList> get();
 };
 
 #endif // BOOK_H
