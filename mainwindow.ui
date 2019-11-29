@@ -17,32 +17,12 @@
    <widget class="QTableWidget" name="bookTable">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>411</width>
+      <x>20</x>
+      <y>30</y>
+      <width>731</width>
       <height>451</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>Title</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Authors</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Year</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>ISBN</string>
-     </property>
-    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

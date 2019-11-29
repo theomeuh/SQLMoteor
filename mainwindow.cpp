@@ -10,12 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , bookTable()
 {
     ui->setupUi(this);
-    bookTable = new QTableWidget();
-    bookTable->setRowCount(10);
-    bookTable->setColumnCount(10);
-
-    bookTable->setItem(1,1,new QTableWidgetItem("test"));
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -33,7 +29,25 @@ void MainWindow::on_actionOpen_triggered()
 {
     QString book;
     PersistentObject* persistentObject = new PersistentObject(book);
-    persistentObject->get();
+    QList<QStringList> data = persistentObject->get();
+    ui->bookTable->setRowCount(data.size());
+    ui->bookTable->setColumnCount(data.value(0).size());
+        /*add stuff inside the table view*/
+        for(int i=0; i<ui->bookTable->rowCount(); i++)
+        {
+            for(int j=0; j<ui->bookTable->columnCount(); j++)
+            {
+                QString valueCell = data.value(i).value(j);
+                QTableWidgetItem *pCell = ui->bookTable->item(i, j);
+                if(!pCell)
+                {
+                    pCell = new QTableWidgetItem;
+                    ui->bookTable->setItem(i, j, pCell);
+                }
+                pCell->setText(valueCell);
+            }
+        }
+
 }
 
 void MainWindow::on_actionErase_Bookcase_triggered()

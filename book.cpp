@@ -33,10 +33,6 @@ int Book::save()
     return PersistentObject::save();
 }
 
-void Book::get(){
-    return PersistentObject::get();
-}
-
 void Book::drop(){
     return PersistentObject::drop();
 }

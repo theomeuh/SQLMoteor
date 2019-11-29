@@ -46,7 +46,7 @@ class PersistentObject
          */
         int save();
         void print();
-        void get();
+        QList<QStringList> get();
         void drop();
 
 };

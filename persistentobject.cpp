@@ -29,7 +29,7 @@ void PersistentObject::print()
     cout << "table: " << this->table.toStdString() << endl;
 }
 
-void PersistentObject::get()
+QList<QStringList> PersistentObject::get()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
     db.setDatabaseName("HARDCODED.db"); // name db
@@ -46,7 +46,9 @@ void PersistentObject::get()
         cout << "Error executing Get query" << endl;
         qDebug() << query.lastError();
     }
+    QList<QStringList> data;
     while(query.next()){
+        QStringList row;
         QString year = query.value(0).toString();
         QString ISBN = query.value(1).toString();
         QString title = query.value(2).toString();
@@ -55,7 +57,14 @@ void PersistentObject::get()
         cout << ", Year : " << year.toStdString();
         cout << ", ISBN : " << ISBN.toStdString();
         cout << ", Authors :" << author.toStdString() << endl;
+        row.append(year);
+        row.append(ISBN);
+        row.append(title);
+        row.append(author);
+        data.append(row);
     }
+
+    return data;
 }
 
 int PersistentObject::save()
