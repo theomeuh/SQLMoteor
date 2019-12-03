@@ -22,14 +22,16 @@ SOURCES += \
     mainwindow.cpp \
     newbook.cpp \
     persistentattribute.cpp \
-    persistentobject.cpp
+    persistentobject.cpp \
+    sqlcontroller.cpp
 
 HEADERS += \
     book.h \
     mainwindow.h \
     newbook.h \
     persistentattribute.h \
-    persistentobject.h
+    persistentobject.h \
+    sqlcontroller.h
 
 FORMS += \
     mainwindow.ui \
