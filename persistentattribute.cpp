@@ -9,9 +9,8 @@ PersistentAttribute::PersistentAttribute(
     type(attributeType),
     data(attribute)
 {
-    qDebug() << "name: " << this->name << endl;
-    qDebug() << "type: " << this->type << endl;
-    qDebug() << "address of data: " << this->data << endl;
+    qDebug() << "name: " << this->name;
+    qDebug() << "type: " << this->type;
     qDebug() << "data: " << this->voidPointer2QString() << endl;
 }
 

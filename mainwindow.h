@@ -23,7 +23,11 @@ private slots:
 
     void on_actionErase_Bookcase_triggered();
 
-    void cellSelected(int nRow, int nCol);
+    void on_actionDrop_triggered();
+
+    void on_actionShow_triggered();
+
+    void on_actionExecute_triggered();
 
 private:
     Ui::MainWindow *ui;

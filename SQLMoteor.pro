@@ -18,18 +18,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     book.cpp \
+    dbmanager.cpp \
     main.cpp \
     mainwindow.cpp \
     newbook.cpp \
     persistentattribute.cpp \
-    persistentobject.cpp
+    persistentobject.cpp \
+    sqlcontroller.cpp
 
 HEADERS += \
     book.h \
+    dbmanager.h \
     mainwindow.h \
     newbook.h \
     persistentattribute.h \
-    persistentobject.h
+    persistentobject.h \
+    sqlcontroller.h
 
 FORMS += \
     mainwindow.ui \
