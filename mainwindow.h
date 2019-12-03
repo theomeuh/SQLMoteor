@@ -23,6 +23,12 @@ private slots:
 
     void on_actionErase_Bookcase_triggered();
 
+    void on_actionDrop_triggered();
+
+    void on_actionShow_triggered();
+
+    void on_actionExecute_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTableWidget* bookTable;

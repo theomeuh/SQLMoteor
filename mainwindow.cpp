@@ -3,6 +3,7 @@
 
 #include "newbook.h"
 #include "book.h"
+#include "sqlcontroller.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -45,7 +46,6 @@ void MainWindow::on_actionOpen_triggered()
                 pCell->setText(valueCell);
             }
         }
-
 }
 
 void MainWindow::on_actionErase_Bookcase_triggered()
@@ -53,4 +53,19 @@ void MainWindow::on_actionErase_Bookcase_triggered()
     QString book;
     PersistentObject* persistentObject = new PersistentObject(book);
     persistentObject->drop();
+}
+
+void MainWindow::on_actionDrop_triggered()
+{
+    SqlController::Instance()->dropRequestList();
+}
+
+void MainWindow::on_actionShow_triggered()
+{
+    SqlController::Instance()->showRequestList();
+}
+
+void MainWindow::on_actionExecute_triggered()
+{
+    SqlController::Instance()->executeRequestList();
 }

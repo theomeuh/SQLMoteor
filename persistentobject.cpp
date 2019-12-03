@@ -5,7 +5,7 @@
 
 #include "persistentobject.h"
 #include "persistentattribute.h"
-
+#include "sqlcontroller.h"
 
 
 using namespace std;
@@ -95,12 +95,9 @@ void PersistentObject::insert(QSqlDatabase *db)
     QString queryStr = QString("INSERT INTO %1 VALUES (%2)").arg(this->table, this->insertFieldsTable());
     qDebug() << queryStr;
     QSqlQuery query(*db);
-    query.prepare(queryStr);
-    if (! query.exec())
-    {
-        cout << "Error executing query" << endl;
-        qDebug() << query.lastError();
-    }
+
+    SqlController::Instance()->addRequest(queryStr);
+    SqlController::Instance()->showRequestList();
 }
 
 QString PersistentObject::generateFieldsTable()
