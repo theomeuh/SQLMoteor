@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include "newbook.h"
-#include "book.h"
 #include "sqlcontroller.h"
 
 MainWindow::MainWindow(QWidget *parent)
