@@ -71,7 +71,7 @@ void PersistentObject::drop()
 {
     QSqlDatabase db = dbManager::Instance()->db;
 
-    QString queryStr = QString("DROP table Book");
+    QString queryStr = QString("DROP table %1").arg(this->table);
     qDebug() << queryStr;
     QSqlQuery query(db);
     query.prepare(queryStr);
