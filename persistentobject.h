@@ -26,10 +26,10 @@ class PersistentObject
         QString insertFieldsTable();
 
         /**
-         * @brief Connect to the db of the app and init the table if it does not exist
+         * @brief Init the table if it does not exist
          * @return QSqlDatabase db
          */
-        void SQLDbInit(QSqlDatabase *db);
+        void createTable(QSqlDatabase *db);
 
         /**
          * @brief Make the insertion of the PersistentObject in the database `db` in the table `table`

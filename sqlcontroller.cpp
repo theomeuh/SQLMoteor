@@ -2,8 +2,6 @@
 #include "QDebug"
 #include <QtSql>
 
-#include <iostream>
-using namespace std;
 
 SqlController* SqlController::m_pInstance = nullptr;
 
@@ -28,11 +26,10 @@ void SqlController::addRequest(QString request)
 
 void SqlController::executeRequestList()
 {
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
     db.setDatabaseName("HARDCODED.db"); // name db
     if (! db.open()){
-        cout << "Unable to open the database." << endl;
+        qDebug() << "Unable to open the database.";
     }
 
     for ( const QString &request : this->requests  )
@@ -41,7 +38,7 @@ void SqlController::executeRequestList()
         query.prepare(request);
         if (! query.exec())
         {
-            cout << "Error executing Get query" << endl;
+            qDebug() << "Error executing Get query";
             qDebug() << query.lastError();
         }
     }

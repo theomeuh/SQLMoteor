@@ -6,6 +6,7 @@
 #include "persistentobject.h"
 #include "persistentattribute.h"
 #include "sqlcontroller.h"
+#include "dbmanager.h"
 
 
 using namespace std;
@@ -31,11 +32,7 @@ void PersistentObject::print()
 
 QList<QStringList> PersistentObject::get(QString tableName)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    db.setDatabaseName("HARDCODED.db"); // name db
-    if (! db.open()){
-        cout << "Unable to open the database." << endl;
-    }
+    QSqlDatabase db = dbManager::Instance()->db;
 
     QString queryStr = QString("select * from %1").arg(tableName);
     qDebug() << queryStr;
@@ -46,6 +43,7 @@ QList<QStringList> PersistentObject::get(QString tableName)
         cout << "Error executing Get query" << endl;
         qDebug() << query.lastError();
     }
+
     QList<QStringList> data;
     while(query.next()){
         QStringList row;
@@ -63,20 +61,15 @@ QList<QStringList> PersistentObject::get(QString tableName)
 
 int PersistentObject::save()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    this->SQLDbInit(&db);
+    QSqlDatabase db = dbManager::Instance()->db;
+    this->createTable(&db);
     this->insert(&db);
-    db.close ();
     return this->id;
 }
 
 void PersistentObject::drop()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // loading driver
-    db.setDatabaseName("HARDCODED.db"); // name db
-    if (! db.open()){
-        cout << "Unable to open the database." << endl;
-    }
+    QSqlDatabase db = dbManager::Instance()->db;
 
     QString queryStr = QString("DROP table Book");
     qDebug() << queryStr;
@@ -86,7 +79,7 @@ void PersistentObject::drop()
     {
         cout << "Error executing query" << endl;
         qDebug() << query.lastError();
-    }    db.close ();
+    }
 }
 
 
@@ -131,13 +124,8 @@ QString PersistentObject::insertFieldsTable()
     return values;
 }
 
-void PersistentObject::SQLDbInit(QSqlDatabase *db)
+void PersistentObject::createTable(QSqlDatabase *db)
 {
-    db->setDatabaseName("HARDCODED.db"); // name db
-    if (! db->open()){
-        cout << "Unable to open the database." << endl;
-    }
-
     QString queryStr = QString("CREATE TABLE IF NOT EXISTS %1 (%2)").arg(this->table, this->generateFieldsTable());
     qDebug() << queryStr;
     QSqlQuery query(*db);
