@@ -28,19 +28,19 @@ void MainWindow::on_actionNew_Book_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
     QList<QStringList> data = Book::get();
-    ui->table->setRowCount(data.size());
-    ui->table->setColumnCount(data.value(0).size());
-        /*add stuff inside the table view*/
-        for(int i=0; i<ui->table->rowCount(); i++)
+    ui->bookTable->setRowCount(data.size());
+    ui->bookTable->setColumnCount(data.value(0).size());
+        /*add stuff inside the bookTable view*/
+        for(int i=0; i<ui->bookTable->rowCount(); i++)
         {
-            for(int j=0; j<ui->table->columnCount(); j++)
+            for(int j=0; j<ui->bookTable->columnCount(); j++)
             {
                 QString valueCell = data.value(i).value(j);
-                QTableWidgetItem *pCell = ui->table->item(i, j);
+                QTableWidgetItem *pCell = ui->bookTable->item(i, j);
                 if(!pCell)
                 {
                     pCell = new QTableWidgetItem;
-                    ui->table->setItem(i, j, pCell);
+                    ui->bookTable->setItem(i, j, pCell);
                 }
                 pCell->setText(valueCell);
             }

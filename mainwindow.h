@@ -23,8 +23,6 @@ private slots:
 
     void on_actionErase_Bookcase_triggered();
 
-    void cellSelected(int nRow, int nCol);
-
 private:
     Ui::MainWindow *ui;
     QTableWidget* bookTable;
