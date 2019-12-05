@@ -49,7 +49,7 @@
     <item row="0" column="1">
      <widget class="QLineEdit" name="authorsEdit">
       <property name="text">
-       <string>Jackie, Michel</string>
+       <string>Michel, Jackie</string>
       </property>
       <property name="placeholderText">
        <string>Seperated with comma please</string>
