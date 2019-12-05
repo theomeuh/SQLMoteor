@@ -96,7 +96,7 @@ void PersistentObject::insert(QSqlDatabase *db)
 void PersistentObject::deleteBook(QString tableName, int id)
 {
     QSqlDatabase db = dbManager::Instance()->db;
-    QString queryStr = QString("DELETE FROM %1 WHERE id = %2 ").arg(tableName, id);
+    QString queryStr = QString("DELETE FROM %1 WHERE id = %2 ").arg(tableName, QString::number(id));
     qDebug() << queryStr;
     QSqlQuery query(db);
     SqlController::Instance()->addRequest(queryStr);

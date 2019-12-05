@@ -16,6 +16,6 @@ DeleteBook::~DeleteBook()
 
 void DeleteBook::on_pushButton_clicked()
 {
-    int id;
+    int id = ui->IdEdit->text().toInt();
     Book::deleteBook(id);
 }
