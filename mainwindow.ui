@@ -93,6 +93,7 @@
     <addaction name="actionNew_Book"/>
     <addaction name="actionOpen"/>
     <addaction name="actionErase_Bookcase"/>
+    <addaction name="actionDelete_Book"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -164,6 +165,11 @@
   <action name="actionDrop">
    <property name="text">
     <string>Drop</string>
+   </property>
+  </action>
+  <action name="actionDelete_Book">
+   <property name="text">
+    <string>Delete Book</string>
    </property>
   </action>
  </widget>

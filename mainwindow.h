@@ -29,6 +29,8 @@ private slots:
 
     void on_actionExecute_triggered();
 
+    void on_actionDelete_Book_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTableWidget* bookTable;

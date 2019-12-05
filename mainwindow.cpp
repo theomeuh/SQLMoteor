@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "newbook.h"
+#include "deletebook.h"
 #include "sqlcontroller.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -67,4 +68,10 @@ void MainWindow::on_actionShow_triggered()
 void MainWindow::on_actionExecute_triggered()
 {
     SqlController::Instance()->executeRequestList();
+}
+
+void MainWindow::on_actionDelete_Book_triggered()
+{
+    DeleteBook *deletebook = new DeleteBook();
+    deletebook->show();
 }

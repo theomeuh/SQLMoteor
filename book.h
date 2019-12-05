@@ -20,6 +20,7 @@ public:
     void print();
     void drop();
     static QList<QStringList> get();
+    static void deleteBook(int id);
 };
 
 #endif // BOOK_H

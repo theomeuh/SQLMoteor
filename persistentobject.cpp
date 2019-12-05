@@ -93,6 +93,17 @@ void PersistentObject::insert(QSqlDatabase *db)
     SqlController::Instance()->showRequestList();
 }
 
+void PersistentObject::deleteBook(QString tableName, int id)
+{
+    QSqlDatabase db = dbManager::Instance()->db;
+    QString queryStr = QString("DELETE FROM %1 WHERE id = %2 ").arg(tableName, id);
+    qDebug() << queryStr;
+    QSqlQuery query(db);
+    SqlController::Instance()->addRequest(queryStr);
+    SqlController::Instance()->showRequestList();
+}
+
+
 QString PersistentObject::generateFieldsTable()
 {
     QString fields = QString("id INTEGER UNIQUE PRIMARY KEY, ");

@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     book.cpp \
     dbmanager.cpp \
+    deletebook.cpp \
     main.cpp \
     mainwindow.cpp \
     newbook.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     book.h \
     dbmanager.h \
+    deletebook.h \
     mainwindow.h \
     newbook.h \
     persistentattribute.h \
@@ -36,6 +38,7 @@ HEADERS += \
     sqlcontroller.h
 
 FORMS += \
+    deletebook.ui \
     mainwindow.ui \
     newbook.ui
 

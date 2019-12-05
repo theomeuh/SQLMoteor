@@ -37,6 +37,13 @@ void Book::drop(){
     return PersistentObject::drop();
 }
 
+
+void Book::deleteBook(int id){
+    return PersistentObject::deleteBook("Book",id);
+}
+
 QList<QStringList> Book::get(){
     return PersistentObject::get("Book");
 }
+
+
