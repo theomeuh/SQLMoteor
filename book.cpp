@@ -34,7 +34,7 @@ int Book::save()
 }
 
 void Book::drop(){
-    return PersistentObject::drop();
+    return PersistentObject::drop("Book");
 }
 
 

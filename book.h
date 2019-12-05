@@ -18,7 +18,7 @@ public:
     Book(QStringList* authors, QString* title, int* ISBN, int* year);
     int save();
     void print();
-    void drop();
+    static void drop();
     static QList<QStringList> get();
     static void deleteBook(int id);
 };

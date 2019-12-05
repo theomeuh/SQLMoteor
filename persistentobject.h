@@ -46,9 +46,10 @@ class PersistentObject
          */
         int save();
         void print();
-        static QList<QStringList> get(QString tableName);
-        void drop();
+        static QList<QStringList> get(QString tableName);    
         static void deleteBook(QString tableName, int id);
+        static void drop(QString tableName);
+
 
 };
 

@@ -67,11 +67,11 @@ int PersistentObject::save()
     return this->id;
 }
 
-void PersistentObject::drop()
+void PersistentObject::drop(QString tableName)
 {
     QSqlDatabase db = dbManager::Instance()->db;
 
-    QString queryStr = QString("DROP table %1").arg(this->table);
+    QString queryStr = QString("DROP table %1").arg(tableName);
     qDebug() << queryStr;
     QSqlQuery query(db);
     query.prepare(queryStr);

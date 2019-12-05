@@ -50,9 +50,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionErase_Bookcase_triggered()
 {
-    QString book;
-    PersistentObject* persistentObject = new PersistentObject(book);
-    persistentObject->drop();
+    Book::drop();
 }
 
 void MainWindow::on_actionDrop_triggered()
